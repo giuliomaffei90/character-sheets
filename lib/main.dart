@@ -38,7 +38,7 @@ const skills = [
 ];
 const abilities = ['forza', 'destrezza', 'costituzione', 'intelligenza', 'saggezza', 'carisma'];
 
-const ink = Color(0xFF6B3A2B), paper = Color(0xFFF7F2EA);
+const ink = Color(0xFF6B3A2B);
 
 String title(String k) {
   final l = labels[k]!;
@@ -60,20 +60,16 @@ String fieldOf(Map rec, String k) => '${(rec['fields'] as Map)[k] ?? ''}';
   );
 }
 
-void main() => runApp(
-  MaterialApp(
-    title: 'Schede PNG',
-    debugShowCheckedModeBanner: false,
-    theme: theme(Brightness.light),
-    darkTheme: theme(Brightness.dark),
-    home: const Home(),
-  ),
-);
+void main() =>
+    runApp(MaterialApp(title: 'Schede PNG', debugShowCheckedModeBanner: false, theme: theme(), home: const Home()));
 
-ThemeData theme(Brightness b) {
-  final light = b == Brightness.light;
-  var cs = ColorScheme.fromSeed(seedColor: ink, brightness: b, dynamicSchemeVariant: DynamicSchemeVariant.fidelity);
-  if (light) cs = cs.copyWith(primary: ink, surface: paper, surfaceContainerLow: const Color(0xFFF0E8DC));
+/// Solo tema scuro, con i toni caldi dell'inchiostro della scheda.
+ThemeData theme() {
+  final cs = ColorScheme.fromSeed(
+    seedColor: ink,
+    brightness: Brightness.dark,
+    dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+  );
   final text = ThemeData(colorScheme: cs).textTheme;
   TextStyle serif(TextStyle? s) => s!.copyWith(fontFamily: 'Georgia', fontWeight: FontWeight.w600);
   final radius = BorderRadius.circular(10);
@@ -88,7 +84,7 @@ ThemeData theme(Brightness b) {
     cardTheme: CardThemeData(
       elevation: 0,
       margin: EdgeInsets.zero,
-      color: light ? const Color(0xFFFFFCF7) : cs.surfaceContainer,
+      color: cs.surfaceContainer,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: cs.outlineVariant),
