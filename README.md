@@ -1,32 +1,36 @@
 # Schede PNG
 
-Editor per schede di personaggi non giocanti: compila i campi, carica un ritratto
-(trascina per spostarlo, rotella o cursore per lo zoom), salva ed esporta il PDF in stile pergamena.
+Editor per schede di personaggi non giocanti, scritto in Flutter per macOS e Windows: compila i campi,
+carica un ritratto (trascina per spostarlo, rotella, pinch o cursore per lo zoom) ed esporta il PDF in stile pergamena.
+Le schede si salvano da sole mentre scrivi.
 
 ## File
-- `app.py` – l'applicazione (Tkinter).
-- `build_sheet.py` – disegna il PDF; da solo genera la scheda vuota compilabile.
-- `build_mac.sh` / `build_win.bat` – creano l'eseguibile (.app / .exe) con PyInstaller.
+- `lib/main.dart` – l'applicazione.
+- `lib/sheet.dart` – disegna il PDF; i campi lasciati vuoti restano compilabili
+  (esportando una scheda vuota si ottiene la scheda compilabile da stampare).
+- `test/app_test.dart` – controlli sul ritaglio del ritratto e sulla generazione del PDF.
 
 ## Avviare da sorgente
-Serve Python 3.11+ con Tkinter:
+Serve [Flutter](https://docs.flutter.dev/get-started/install) 3.47 o successivo:
 ```
-pip install reportlab pillow
-python3 app.py
+flutter run -d macos     # oppure -d windows
 ```
 
 ## Creare l'eseguibile
-Serve Python 3.11+ con Tkinter. Ogni sistema compila il proprio eseguibile:
-- **macOS**: `sh build_mac.sh` → `dist/Schede PNG.app`
-- **Windows**: doppio clic su `build_win.bat` → `dist\Schede PNG.exe`
-  (installa Python da python.org lasciando spuntato "tcl/tk and IDLE").
+Ogni sistema compila il proprio eseguibile:
+- **macOS** (serve Xcode): `flutter build macos` → `build/macos/Build/Products/Release/Schede PNG.app`
+- **Windows** (serve Visual Studio con "Sviluppo di applicazioni desktop con C++"): `flutter build windows`
+  → la cartella `build\windows\x64\runner\Release` (da distribuire per intero).
 
-Il PDF usa Hoefler Text su macOS e Georgia su Windows; per un aspetto identico
-sui due sistemi basta aggiungere un font libero (es. EB Garamond) alla lista `_FONTS` in `build_sheet.py`.
+Il PDF usa Georgia, presente su macOS e Windows, quindi ha lo stesso aspetto su entrambi.
+
+## Scorciatoie
+- ⌘N / Ctrl+N – nuovo personaggio
+- ⌘E / Ctrl+E – esporta PDF
 
 ## Dati
 I personaggi salvati sono in `~/SchedePNG/` (un `.json` più l'immagine per ciascuno):
-copiando quella cartella si spostano su un altro computer.
+copiando quella cartella si spostano su un altro computer. Il formato è lo stesso della vecchia versione Python.
 
 ## Licenza
 MIT — vedi [LICENSE](LICENSE).

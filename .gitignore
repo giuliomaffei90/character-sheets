@@ -1,5 +1,6 @@
-.venv/
-build/
-dist/
-__pycache__/
-*.spec
+.DS_Store
+.dart_tool/
+.flutter-plugins-dependencies
+/build/
+*.iml
+.idea/

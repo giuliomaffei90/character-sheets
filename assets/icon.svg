@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="paper" cx="45%" cy="35%" r="75%">
+      <stop offset="0" stop-color="#FFF9EE"/>
+      <stop offset="0.65" stop-color="#F3E7D2"/>
+      <stop offset="1" stop-color="#DCC7A6"/>
+    </radialGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#84483A"/>
+      <stop offset="1" stop-color="#4E2A1F"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F3D98B"/>
+      <stop offset="0.5" stop-color="#D4A94E"/>
+      <stop offset="1" stop-color="#A97A2C"/>
+    </linearGradient>
+    <linearGradient id="feather" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFDF7"/>
+      <stop offset="1" stop-color="#E8D9BE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- pergamena -->
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#paper)"/>
+  <rect x="136" y="136" width="752" height="752" rx="150" fill="none" stroke="#6B3A2B" stroke-width="10"/>
+  <rect x="154" y="154" width="716" height="716" rx="134" fill="none" stroke="#6B3A2B" stroke-width="3" opacity="0.7"/>
+
+  <!-- penna d'oca, dietro lo scudo -->
+  <g transform="rotate(-42 512 512)" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M 540 516 C 620 400, 800 390, 890 452 C 820 560, 640 600, 540 540 Z"
+          fill="url(#feather)" stroke="#6B3A2B" stroke-width="9"/>
+    <path d="M 200 512 C 440 510, 700 492, 890 452" fill="none" stroke="#6B3A2B" stroke-width="9"/>
+    <path d="M 250 497 L 130 512 L 250 527 Z" fill="#6B3A2B" stroke="#6B3A2B" stroke-width="6"/>
+    <path d="M 222 512 L 168 512" stroke="#F3E7D2" stroke-width="4"/>
+  </g>
+
+  <!-- scudo -->
+  <path d="M 296 332 Q 512 284 728 332 L 728 562 C 728 704 636 798 512 860 C 388 798 296 704 296 562 Z" fill="#3E2118" opacity="0.18"/>
+  <path d="M 296 318 Q 512 270 728 318 L 728 548 C 728 690 636 784 512 846 C 388 784 296 690 296 548 Z"
+        fill="url(#ink)" stroke="#3E2118" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M 328 346 Q 512 306 696 346 L 696 548 C 696 670 618 752 512 808 C 406 752 328 670 328 548 Z"
+        fill="none" stroke="url(#gold)" stroke-width="12" stroke-linejoin="round"/>
+
+  <!-- d20 -->
+  <g transform="translate(512 560)" stroke-linejoin="round">
+    <path d="M 0 -132 L 114 -66 L 114 66 L 0 132 L -114 66 L -114 -66 Z" fill="url(#gold)" stroke="#3E2118" stroke-width="8"/>
+    <path d="M 0 -78 L 68 40 L -68 40 Z" fill="#F7E3A6" stroke="#3E2118" stroke-width="7"/>
+    <path d="M 0 -132 L 0 -78 M -114 -66 L 0 -78 M 114 -66 L 0 -78 M -114 -66 L -68 40 M 114 -66 L 68 40 M -114 66 L -68 40 M 114 66 L 68 40 M 0 132 L -68 40 M 0 132 L 68 40"
+          fill="none" stroke="#3E2118" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>
