@@ -37,8 +37,8 @@ Dependencies are installed with `flutter pub get`:
 ## Installation
 
 ```bash
-git clone https://gitlab.com/giuliomaffei90/character-sheets.git
-cd character-sheets
+git clone https://github.com/giuliomaffei90/schede-png.git
+cd schede-png
 flutter pub get
 flutter build macos
 open "build/macos/Build/Products/Release/Schede PNG.app"
