@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            platform: macos
+          - os: windows-latest
+            platform: windows
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.4
+          channel: stable
+      - run: flutter build ${{ matrix.platform }} --release
+
+      - if: matrix.platform == 'macos'
+        run: ditto -c -k --keepParent "build/macos/Build/Products/Release/Schede PNG.app" SchedePNG-macOS.zip
+
+      # The Visual C++ runtime goes in the zip so the app starts without installing the redistributable.
+      - if: matrix.platform == 'windows'
+        shell: pwsh
+        run: |
+          $out = "build/windows/x64/runner/Release"
+          foreach ($dll in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') { Copy-Item "C:/Windows/System32/$dll" $out }
+          Compress-Archive -Path "$out/*" -DestinationPath SchedePNG-Windows.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}
+          path: SchedePNG-*.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+      - run: gh release create "$GITHUB_REF_NAME" SchedePNG-*.zip --repo "$GITHUB_REPOSITORY" --title "Schede PNG $GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
